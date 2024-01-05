@@ -80,3 +80,17 @@ jobs:
             with:
               username: ${{ secrets.DOCKERHUB_USERNAME }}
               password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+          - name: Build and push
+            uses: docker/build-push-action@v5
+            with:
+              context: .
+              push: true
+              tags: gharbi1936/k8s:app-${{github.sha}}
+          # - run: 
+            
+          #         docker run gharbi1936/k8s:app-${{github.sha}} -d \
+          #         -e MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
+          #         -e MONGO_USERNAME ${{vars.MONGO_USERNAME}}
+          #         -e MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
+                 
