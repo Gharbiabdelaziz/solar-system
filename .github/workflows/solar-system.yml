@@ -5,7 +5,7 @@ on:
     push: 
         branches: 
             - 'main'
-            - 'feature/v1'
+            - 'feature/*'
 env:
     MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
     MONGO_USERNAME: ${{vars.MONGO_USERNAME}}
@@ -15,7 +15,7 @@ jobs:
         name: unit testing
         strategy:
           matrix:
-            nodejs_version: [20]
+            nodejs_version: [18]
             os: [ubuntu-latest]
         runs-on: ${{matrix.os}}
         steps:
@@ -39,7 +39,7 @@ jobs:
             - run: npm test
               id: run_test_on_nodejs
               continue-on-error: true
-              
+
             - name: upload artifact
               uses: actions/upload-artifact@v3
               with:
