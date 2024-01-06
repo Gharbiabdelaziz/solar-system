@@ -1,3 +1,3 @@
 git add .
-git commit -m "testing wf git/action"
+git commit -m "create image in GHCR"
 git push
