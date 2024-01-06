@@ -98,10 +98,11 @@ jobs:
               password: ${{ github.token }}
               registry: ${{env.ghcr_registry}}
           - name: Build and push
-            uses: docker/build-push-action@v5
-            with:
-              context: .
-              push: true
-              tags: ${{env.ghcr_registry}}/${{github.repository}}:app-${{github.sha}}
+            run: echo ${{env.ghcr_registry}}/${{github.repository | lower }}:app-${{github.sha | lower }}
+            # uses: docker/build-push-action@v5
+            # with:
+            #   context: .
+            #   push: true
+            #   tags: ${{env.ghcr_registry}}/${{github.repository | lower }}:app-${{github.sha | lower }}
 
 
