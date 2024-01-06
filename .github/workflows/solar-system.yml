@@ -98,15 +98,10 @@ jobs:
               password: ${{ github.token }}
               registry: ${{env.ghcr_registry}}
           - name: Build and push
-            run: |
-                   echo ${{github.repository_owner}}
-                   echo ----------------------------------------
-                   echo ${{github.repository}}
-            # uses: docker/build-push-action@v5
-            # with:
-            #   context: .
-            #   push: true
-            #   tags: ${{env.ghcr_registry}}/${{github.repository_owner}}/${{github.repository}}:app-${{github.sha}}
-            #   ghcr.io/Gharbiabdelaziz/Gharbiabdelaziz/solar-system:app-248dc33d3f84a5542b49897c0234f7caff4cda18
+            uses: docker/build-push-action@v5
+            with:
+              context: .
+              push: true
+              tags: ${{env.ghcr_registry}}/${{github.repository}}:app-${{github.sha}}
 
 
