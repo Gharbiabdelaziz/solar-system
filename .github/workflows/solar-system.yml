@@ -18,6 +18,15 @@ jobs:
             nodejs_version: [18]
             os: [ubuntu-latest]
         runs-on: ${{matrix.os}}
+        services:
+          mongo-db:
+            image: mongo
+            ports:
+              - 27017:27017
+            env:
+              MONGO_URI: 'mongodb+srv://localhost:27017/superData'
+              MONGO_USERNAME: non-prod-user
+              MONGO_PASSWORD: non-prod-password
         steps:
             - name: checkout repository
               uses: actions/checkout@v1
@@ -99,7 +108,7 @@ jobs:
               username: ${{ github.repository_owner }}
               password: ${{ github.token }}
               registry: ${{env.ghcr_registry}}
-              
+
           - name: Build and push
             uses: docker/build-push-action@v5
             with:

@@ -1,3 +1,3 @@
 git add .
-git commit -m "create image in GHCR 02"
+git commit -m "add service container"
 git push
