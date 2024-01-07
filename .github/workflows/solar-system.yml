@@ -1,4 +1,4 @@
-name: ghcr images 
+name: solar system 
 
 on:
     workflow_dispatch: 
@@ -59,43 +59,39 @@ jobs:
     #             path: test-results.xml
     #           if: always()
 
-    code_coverage:
-      name: code coverage
-      runs-on: ubuntu-latest
+    # code_coverage:
+    #   name: code coverage
+    #   runs-on: ubuntu-latest
+    #   # # create container in this job with service
+    #   services:
+    #       mongo-db:
+    #         image: mongo
+    #         options: 
+    #           --name mongo
+    #         ports:
+    #           - 27017:27017
+    #   # # create second container to run the steps below
+    #   container: 
+    #     image: node:18
+    #   env:
+    #     MONGO_URI: 'mongodb://mongo:27017/superData'
+    #     MONGO_USERNAME: non-prod-user
+    #     MONGO_PASSWORD: non-prod-password
 
-      services:
-          mongo-db:
-            image: mongo
-            options: 
-              --name mongo
-            ports:
-              - 27017:27017
-      env:
-        MONGO_URI: 'mongodb://mongo:27017/superData'
-        MONGO_USERNAME: non-prod-user
-        MONGO_PASSWORD: non-prod-password
+    #   steps:
+    #       - name: checkout repository
+    #         uses: actions/checkout@v1
+    #       - run: npm install
+    #       - run: npm run coverage
+    #         continue-on-error: true
+    #       - name: archive coverage
+    #         uses: actions/upload-artifact@v3
+    #         with:
+    #           name: code-coverage-archive
+    #           path: coverage
+    #           retention-days: 5
 
-      container: 
-        image: node:18
-      steps:
-          - name: checkout repository
-            uses: actions/checkout@v1
-          # - name: setup node 18
-          #   uses: actions/setup-node@v3
-          #   with:
-          #     node-version: 18
-          - run: npm install
-          - run: npm run coverage
-            continue-on-error: true
-          - name: archive coverage
-            uses: actions/upload-artifact@v3
-            with:
-              name: code-coverage-archive
-              path: coverage
-              retention-days: 5
-
-
-    # containersation:
+    # docker:
     #   permissions:
     #     packages: write
     #   env:
@@ -135,5 +131,23 @@ jobs:
     #           context: .
     #           push: true
     #           tags: ${{env.ghcr_registry}}/${{github.repository}}:app-${{github.sha}}
+
+    dev-deploy:
+      runs-on: ubuntu-latest
+      # needs: docker
+      steps:
+        - name: checkout repository
+          uses: actions/checkout@v1
+        - name: install kubectl
+          uses: azure/setup-kubectl@v3
+          with:
+            version: 'latest' # default is latest stable
+          id: install
+        - name: fetch kubernetes cluster details
+          run: |
+                  kubectl version 
+                  echo ----------
+                  kubectl get nodes
+                  echo ----------
 
 
