@@ -28,6 +28,11 @@ jobs:
               MONGO_USERNAME: non-prod-user
               MONGO_PASSWORD: non-prod-password
         steps:
+            - name: list container
+              run: |
+                     echo-------------------
+                     docker ps -l
+                     echo ------------------
             - name: checkout repository
               uses: actions/checkout@v1
             - name: setup node ${{matrix.nodejs_version}}
