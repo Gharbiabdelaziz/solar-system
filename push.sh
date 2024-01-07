@@ -1,3 +1,3 @@
 git add .
-git commit -m "add service container"
+git commit -m "run coverage in container"
 git push
