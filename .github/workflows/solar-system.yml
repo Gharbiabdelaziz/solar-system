@@ -30,7 +30,7 @@ jobs:
         steps:
             - name: list container
               run: |
-                     echo-------------------
+                     echo -------------------
                      sudo docker ps -l
                      echo ------------------
             - name: checkout repository
