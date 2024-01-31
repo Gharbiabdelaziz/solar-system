@@ -150,7 +150,4 @@ jobs:
             method: kubeconfig
             kubeconfig: ${{secrets.KUBECONFIG}}
         - name: checkout repository
-          run: |
-            kubectl version
-            echo ------------------
-            kubectl get nodes
+          run: kubectl version && kubectl get nodes
