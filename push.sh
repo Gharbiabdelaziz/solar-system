@@ -1,3 +1,3 @@
 git add .
-git commit -m "kubectl get no"
+git commit -m "node info"
 git push
