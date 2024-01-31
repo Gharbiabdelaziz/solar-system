@@ -1,3 +1,3 @@
 git add .
-git commit -m "node info"
+git commit -m "exec dev deploy"
 git push
